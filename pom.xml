@@ -1,50 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.apache.maven</groupId>
     <artifactId>maven-parent</artifactId>
     <version>42</version>
-    <relativePath />
+    <relativePath></relativePath>
   </parent>
-
   <groupId>org.apache.maven.resolver</groupId>
   <artifactId>maven-resolver</artifactId>
   <version>1.9.20</version>
   <packaging>pom</packaging>
-
   <name>Maven Artifact Resolver</name>
   <description>The parent and aggregator for the repository system.</description>
   <url>https://maven.apache.org/resolver/</url>
   <inceptionYear>2010</inceptionYear>
-
   <contributors>
     <contributor>
       <name>Matej Cimbora</name>
     </contributor>
   </contributors>
-
   <modules>
-    <!-- NOTE: Be sure to update the bin assembly descriptor as well if the module list changes -->
     <module>maven-resolver-api</module>
     <module>maven-resolver-spi</module>
     <module>maven-resolver-util</module>
@@ -61,7 +38,6 @@
     <module>maven-resolver-supplier</module>
     <module>maven-resolver-demos</module>
   </modules>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-resolver.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-resolver.git</developerConnection>
@@ -82,23 +58,20 @@
       <url>scm:svn:https://svn.apache.org/repos/asf/maven/website/components/${maven.site.path}</url>
     </site>
   </distributionManagement>
-
   <properties>
+    <guiceVersion>6.0.0</guiceVersion>
+    <minimalJavaBuildVersion>[1.8.0-362,)</minimalJavaBuildVersion>
+    <maven.site.path>resolver-archives/resolver-LATEST</maven.site.path>
     <javaVersion>8</javaVersion>
     <surefire.redirectTestOutputToFile>true</surefire.redirectTestOutputToFile>
-    <failsafe.redirectTestOutputToFile>${surefire.redirectTestOutputToFile}</failsafe.redirectTestOutputToFile>
-    <maven.site.path>resolver-archives/resolver-LATEST</maven.site.path>
+    <slf4jVersion>1.7.36</slf4jVersion>
+    <minimalMavenBuildVersion>[3.8.7,)</minimalMavenBuildVersion>
     <checkstyle.violation.ignore>None</checkstyle.violation.ignore>
     <sisuVersion>0.9.0.M2</sisuVersion>
-    <guiceVersion>6.0.0</guiceVersion>
-    <slf4jVersion>1.7.36</slf4jVersion>
-    <!-- used by supplier and demo only -->
-    <mavenVersion>3.9.6</mavenVersion>
-    <minimalMavenBuildVersion>[3.8.7,)</minimalMavenBuildVersion>
-    <minimalJavaBuildVersion>[1.8.0-362,)</minimalJavaBuildVersion>
     <project.build.outputTimestamp>2024-04-26T10:42:05Z</project.build.outputTimestamp>
+    <mavenVersion>3.9.6</mavenVersion>
+    <failsafe.redirectTestOutputToFile>${surefire.redirectTestOutputToFile}</failsafe.redirectTestOutputToFile>
   </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -162,7 +135,6 @@
         <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest</artifactId>
@@ -187,7 +159,6 @@
         <version>4.11.0</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-utils</artifactId>
@@ -198,14 +169,12 @@
         <artifactId>plexus-xml</artifactId>
         <version>3.0.0</version>
       </dependency>
-
       <dependency>
         <groupId>javax.inject</groupId>
         <artifactId>javax.inject</artifactId>
         <version>1</version>
         <scope>provided</scope>
       </dependency>
-
       <dependency>
         <groupId>org.eclipse.sisu</groupId>
         <artifactId>org.eclipse.sisu.inject</artifactId>
@@ -232,7 +201,6 @@
         <artifactId>guava</artifactId>
         <version>33.1.0-jre</version>
       </dependency>
-
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
@@ -246,7 +214,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -254,24 +221,13 @@
           <groupId>com.github.siom79.japicmp</groupId>
           <artifactId>japicmp-maven-plugin</artifactId>
           <version>0.21.1</version>
-          <configuration>
-            <oldVersion>
-              <!-- We compare same module against 1.8.0 set as "baseline" -->
-              <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>${project.artifactId}</artifactId>
-                <version>1.8.0</version>
-                <type>${project.packaging}</type>
-              </dependency>
-            </oldVersion>
-          </configuration>
           <executions>
             <execution>
               <id>default-source-cmp</id>
+              <phase>verify</phase>
               <goals>
                 <goal>cmp</goal>
               </goals>
-              <phase>verify</phase>
               <configuration>
                 <parameter>
                   <excludes>
@@ -302,10 +258,10 @@
             </execution>
             <execution>
               <id>default-binary-cmp</id>
+              <phase>verify</phase>
               <goals>
                 <goal>cmp</goal>
               </goals>
-              <phase>verify</phase>
               <configuration>
                 <parameter>
                   <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
@@ -314,9 +270,18 @@
               </configuration>
             </execution>
           </executions>
+          <configuration>
+            <oldVersion>
+              <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>1.8.0</version>
+                <type>${project.packaging}</type>
+              </dependency>
+            </oldVersion>
+          </configuration>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <configuration>
             <detectOfflineLinks>false</detectOfflineLinks>
@@ -398,18 +363,15 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jxr-plugin</artifactId>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <configuration>
             <autoVersionSubmodules>true</autoVersionSubmodules>
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
             <argLine>-Xmx128m</argLine>
@@ -420,16 +382,7 @@
           </configuration>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <configuration>
-            <failIfNoTests>false</failIfNoTests>
-            <argLine>-Xmx128m</argLine>
-            <redirectTestOutputToFile>${failsafe.redirectTestOutputToFile}</redirectTestOutputToFile>
-            <systemPropertyVariables>
-              <java.io.tmpdir>${project.build.directory}/failsafe-tmp</java.io.tmpdir>
-            </systemPropertyVariables>
-          </configuration>
           <executions>
             <execution>
               <goals>
@@ -438,6 +391,14 @@
               </goals>
             </execution>
           </executions>
+          <configuration>
+            <failIfNoTests>false</failIfNoTests>
+            <argLine>-Xmx128m</argLine>
+            <redirectTestOutputToFile>${failsafe.redirectTestOutputToFile}</redirectTestOutputToFile>
+            <systemPropertyVariables>
+              <java.io.tmpdir>${project.build.directory}/failsafe-tmp</java.io.tmpdir>
+            </systemPropertyVariables>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.eclipse.sisu</groupId>
@@ -446,24 +407,12 @@
           <executions>
             <execution>
               <id>generate-index</id>
+              <phase>process-classes</phase>
               <goals>
                 <goal>main-index</goal>
               </goals>
-              <phase>process-classes</phase>
             </execution>
           </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
-          <configuration>
-            <excludes combine.children="append">
-              <exclude>src/test/resources/**/*.ini</exclude>
-              <exclude>src/test/resources/**/*.txt</exclude>
-              <exclude>src/test/resources/ssl/*-store</exclude>
-              <exclude>.gitattributes</exclude>
-            </excludes>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>biz.aQute.bnd</groupId>
@@ -486,7 +435,6 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <configuration>
             <archive>
@@ -503,6 +451,15 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
         <version>1.23</version>
+        <executions>
+          <execution>
+            <id>check-java-compat</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <signature>
             <groupId>org.codehaus.mojo.signature</groupId>
@@ -510,26 +467,15 @@
             <version>1.0</version>
           </signature>
         </configuration>
-        <executions>
-          <execution>
-            <id>check-java-compat</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>reporting</id>
       <reporting>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <reportSets>
               <reportSet>
@@ -542,7 +488,6 @@
             </reportSets>
           </plugin>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jxr-plugin</artifactId>
             <reportSets>
               <reportSet>
