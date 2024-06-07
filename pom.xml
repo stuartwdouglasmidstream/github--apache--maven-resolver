@@ -454,18 +454,6 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
-          <configuration>
-            <excludes combine.children="append">
-              <exclude>src/test/resources/**/*.ini</exclude>
-              <exclude>src/test/resources/**/*.txt</exclude>
-              <exclude>src/test/resources/ssl/*-store</exclude>
-              <exclude>.gitattributes</exclude>
-            </excludes>
-          </configuration>
-        </plugin>
-        <plugin>
           <groupId>biz.aQute.bnd</groupId>
           <artifactId>bnd-maven-plugin</artifactId>
           <version>6.3.1</version>
@@ -496,6 +484,7 @@
             </archive>
           </configuration>
         </plugin>
+        
       </plugins>
     </pluginManagement>
     <plugins>
